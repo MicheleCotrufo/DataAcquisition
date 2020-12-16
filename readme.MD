@@ -1,5 +1,5 @@
-# Data Acquisition: Oscilloscope&Powermeter
-A Python interface to automatize data acquisition from a Tektronix scope and a Thorlabs powermeter - and it comes with a GUI!
+# Data Acquisition
+A Python modular interface to interface to different instruments and automatize data acquisition
 
 
 <!-- TABLE OF CONTENTS -->
@@ -54,6 +54,11 @@ Note: The ophir powermeter also needs to be enabled for USB communication, which
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+A .json file is used to specify the software settings. In this file we can specify how many and which instruments to connect to the software, which data to extract from each instrument, which plots to show, etc. One can create different .json files corresponding to different interfaces.
+One the .json file has been created, launch the software with command line
+```
+python "Path\To\MainApplication\MainApplication.pyw" "Path\To\jsonFile\FileName.json"
+```
 
 
 <!-- LICENSE -->

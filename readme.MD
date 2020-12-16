@@ -36,8 +36,7 @@ The software has been tested with Python 3.8.5 on Windows 10. It should work on 
 3. Install numpy (```pip install numpy```)
 4. Install matplotlib>3.3.1 (```pip install matplotlib>3.3.1```)
 
-Different intruments will require different additional libraries. Many instruments (e.g. the Tektronik scope and the Thorlabs powermeter) work with the pyvisa library
-5. Install pyvisa (```pip install pyvisa```)
+Different intruments will require different additional libraries. Many instruments (e.g. the Tektronik scope and the Thorlabs powermeter) work with the pyvisa library. Install pyvisa (```pip install pyvisa```)
 
 #### Thorlabs powermeter
 The Thorlabs powermeter does not require any additional library apart from pyvisa!

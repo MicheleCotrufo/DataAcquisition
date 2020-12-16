@@ -43,10 +43,10 @@ The Thorlabs powermeter does not require any additional library apart from pyvis
 
 #### Tektronix scope
 The Tektronix scope requires the pyvisa library, and it is necessary to install also the NI-VISA library from https://www.ni.com/en-us/support/downloads/drivers/download.ni-visa.html#346210. 
-IMPORTANT: the library TEKVisa might generate conflicts with the library pyvisa used by this software. Before proceeding with installation, make sure you uninstall any version of TEKVisa. Usually this library gets installed together with the OpenChoice software from Tektronix.
+IMPORTANT: the library TEKVisa might generate conflicts with the library pyvisa. Before proceeding with installation, make sure you uninstall any version of TEKVisa. Usually this library gets installed together with the OpenChoice software from Tektronix.
 
 #### Ophir powermeter
-The ophir powermeter does not work with pyvisa library, the communication is provided to the pywin32 library to interact with COM objects.
+The ophir powermeter does not work with the pyvisa library, the communication is instead provided through the pywin32 library.
 Install via ``` pip install pywin32 ```.
 Note: The ophir powermeter also needs to be enabled for USB communication, which might require buying as serial code from Ophir.
 

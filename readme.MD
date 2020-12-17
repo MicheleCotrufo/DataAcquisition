@@ -1,5 +1,5 @@
 # Data Acquisition
-A Python modular interface to interface to different instruments and automatize data acquisition
+A Python modular interface to connect different instruments together and automatize data acquisition
 
 
 <!-- TABLE OF CONTENTS -->

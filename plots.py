@@ -21,6 +21,9 @@ class PlotObject(tk.Frame):
         self.SetPlotConfig = SetPlotConfig
         self.GetPlottingStyle = GetPlottingStyle
 
+        self.Max = 0 #Keep track of the maximum of minimum values plotted in this plot (among all possible curves). It is used for resizing purposes
+        self.Min = 0
+
         self.PlotErrorBars_var = tk.IntVar(value=1) #This TK variable keeps track of wheter the user wants to plot the errorbars or not
 
         #Create the figure
@@ -28,23 +31,41 @@ class PlotObject(tk.Frame):
         self.fig.set_tight_layout(True)
         self.ax = self.fig.add_subplot(111,facecolor='black')
         self.canvas = FigureCanvasTkAgg(self.fig, master=self)  # A tk.DrawingArea.
-        #self.canvasNavigationToolbar = NavigationToolbar2Tk(self.canvas, parent,pack_toolbar=False)
+        
+        
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
         graph_widget = self.canvas.get_tk_widget()
         graph_widget.grid(row=0, column=0, sticky=tk.N+tk.S+tk.E+tk.W)
         #self.config(highlightbackground = "red", highlightcolor= "red", highlightthickness=1,bd=1)
-
+        
 
         PlotConfig = self.GetPlotConfig()          #PlotConfig specifies what is plotted in the plot, as defined in each element of the list PlotsConfig in config.py
                                                     #This configuration is stored as a property of the MainWindow, and can also be changed by the user after the application is started
 
+        self.FramePlotControls = tk.Frame(self)
+        self.FramePlotControls.grid(row=1, column=0,pady=1,padx=0,sticky=tk.W)
+        
         if not(type(PlotConfig )==int):         #If PlotConfig is an integer, then this plot has been assigned directly to an instrument, and we don't want to manipulate it further 
                                                 #If PlotConfig is not an integer, then this plot is meant to show acquired data, and we add a 'Configure Plot' button to let the user choose the data to plot
             self.UpdateInternalVariables()
-                              
-            self.ButtonConfigure = tk.Button(self, text="Configure Plot", width=16, command=lambda:self.popup_Config(self.ButtonConfigure))
-            self.ButtonConfigure.grid(row=1, column=0,pady=1,padx=0,sticky=tk.W)
+            self.iconConfigure = tk.PhotoImage(file = r"graphic\settings_icon.png") 
+            self.ButtonConfigure = tk.Button(self.FramePlotControls, text="", image = self.iconConfigure, command=lambda:self.popup_Config(self.ButtonConfigure))
+            self.ButtonConfigure.pack(fill=tk.X, side=tk.LEFT,padx=2,pady=0)
             self.canvas.draw()
 
+        self.iconResizeY_MinMax = tk.PhotoImage(file = r"graphic\resize_min_max_icon.png") 
+        self.ButtonResizeY_MinMax = tk.Button(self.FramePlotControls, image = self.iconResizeY_MinMax, command=self.ResizeY)
+        self.ButtonResizeY_MinMax.pack(fill=tk.X, side=tk.LEFT,padx=2,pady=0)
+
+        self.iconResizeY_ZeroMax = tk.PhotoImage(file = r"graphic\resize_0_max_icon.png") 
+        self.ButtonResizeY_ZeroMax = tk.Button(self.FramePlotControls,  image = self.iconResizeY_ZeroMax, command=lambda:self.ResizeY(Min=0))
+        self.ButtonResizeY_ZeroMax.pack(fill=tk.X, side=tk.LEFT,padx=2,pady=0)
+        self.canvasNavigationToolbar = NavigationToolbar2Tk(self.canvas, self.FramePlotControls,pack_toolbar=False)
+        self.canvasNavigationToolbar.children['!button3'].pack_forget()
+        self.canvasNavigationToolbar.children['!button2'].pack_forget()
+        self.canvasNavigationToolbar.children['!button4'].pack_forget()
+        self.canvasNavigationToolbar.pack(fill=tk.X, side=tk.LEFT,padx=2,pady=0)
 
     def UpdateInternalVariables(self):
         '''
@@ -97,6 +118,8 @@ class PlotObject(tk.Frame):
         NameData = self.GetNameData() 
 
         self.ax.clear()
+        self.Max = 0
+        self.Min = 0
                                             
         #NameData contains the name of all acquired data, in the same format used in the list PlotConfig. 
         #We use NameData to find the corresponding index of the x data and of the y-, in order to extract the correct columns from Data 
@@ -110,6 +133,11 @@ class PlotObject(tk.Frame):
         for i in range(1,len(PlotConfig)):
             YData_index = NameData.index(PlotConfig[i])
             y =  Data[:,YData_index]
+            if len(y) > 0:
+                if max(y) > self.Max:
+                    self.Max = max(y)
+                if min(y) < self.Min:
+                    self.Min = min(y)
             yerr = Data_STD[:,YData_index]
             self.Plot(x=x, y=y, xerr=xerr, yerr=yerr, label=PlotConfig[i], **(DataPlottingStyle[YData_index]))
             numcolLeg = numcolLeg + 1
@@ -125,6 +153,14 @@ class PlotObject(tk.Frame):
         self.ax.set_xlabel(PlotConfig[0], fontsize=12)
 
         self.canvas.draw()
+
+    def ResizeY(self,Min=None,Max=None):
+        if Min == None:
+            Min = self.Min
+        if Max == None:
+            Max = self.Max
+        self.ax.set_ylim((Min, Max))
+
 
     def Plot(self,x,y,xerr,yerr,label,**kwargs):
         '''
@@ -174,7 +210,7 @@ class PlotObject(tk.Frame):
             bt_h = bt.winfo_height()
             win_h = self.popup.winfo_height()
             win_w = self.popup.winfo_width()
-            y = y +  bt_h
+            y = y - win_h
             #x = x - win_w
             self.popup.geometry(f'+{x}+{y}')
 
@@ -214,6 +250,7 @@ class PlotContainer(tk.Frame): #Container for Plots, which is also a TK frame
             NewPlot = PlotObject(self, MainWindow, GetData = MainWindow.GetCurrentData, GetNameData = MainWindow.GetNameData, 
                                  GetPlotConfig=lambda i=i:MainWindow.GetPlotConfig(i), SetPlotConfig=lambda x,i=i:MainWindow.SetPlotConfig(i,x), 
                                  GetPlottingStyle = MainWindow.GetDataPlottingStyle, PlotSize=PlotsSizes[i])
+            NewPlot.config(highlightbackground = "black", highlightcolor= "black", highlightthickness=1,bd=1)
             NewPlot.grid(row=i//NCols,column=i%NCols, sticky=tk.N+tk.S+tk.E+tk.W)
             self.ListPlots.append(NewPlot)
         for i in range(0,NCols):

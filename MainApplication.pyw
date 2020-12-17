@@ -149,13 +149,13 @@ class MainApplication():
         #The object ContainerForInstrumentFrames is a TK frame which contains all the instrument panels
         self.ContainerForInstrumentFrames = tk.LabelFrame(self.TopFrame,text="Instruments")
         self.ContainerForInstrumentFrames.config(highlightbackground = "red", highlightcolor= "red", highlightthickness=1,bd=1)
-        self.ContainerForInstrumentFrames.pack(fill=tk.BOTH, side=tk.LEFT,padx=2)
+        self.ContainerForInstrumentFrames.pack(fill=tk.BOTH, side=tk.LEFT,padx=2,pady=0)
 
         self.InstrumentFrames = [] #The elements of self.InstrumentFrames are TK frames, each of them containing the GUI for the corresponding object defined in self.instruments     
         for instrument in self.instruments:
             Frame = instrument.CreatePanelGUI(self.ContainerForInstrumentFrames) #For each instrument, we call the method CreatePanelGUI of the corresponding Interface object
-            Frame.frame['height'] =150
-            Frame.frame.pack(fill=tk.BOTH, side=tk.LEFT,padx=2)
+            Frame.frame['height'] =200
+            Frame.frame.pack(fill=tk.BOTH, side=tk.LEFT,padx=2,pady=0)
             self.InstrumentFrames.append(Frame)
        
         #The object ContainerForSettingFrames is a TK frame which contains all the other setting panels
@@ -178,7 +178,6 @@ class MainApplication():
                                                                                                   #and it will use PlotsSizes and NCols for the geometry
                                                                                                   #For each plot, the corresponding element in PlotsConfig can also be changed dynamically by the user
                                                                                                   #(unless the plots is directly assigned to an instrument)
-        self.Plots.config(highlightbackground = "red", highlightcolor= "red", highlightthickness=1,bd=1)
         self.Plots.grid(row=1,column=0, sticky=tk.N+tk.S+tk.E+tk.W)
         #Initialize plots        
         self.UpdateAllPlots()
@@ -355,11 +354,7 @@ class MainApplication():
 import os
 import sys
 
-try:
-    from rich.traceback import install
-    install() #This makes the console output more readale
-except ImportError:
-    pass
+os.chdir(os.path.dirname(sys.argv[0]))
 
 # Count the input arguments
 NArgsIn = len(sys.argv) - 1

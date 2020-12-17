@@ -56,7 +56,7 @@ Note: The ophir powermeter also needs to be enabled for USB communication, which
 ## Usage
 A .json file is used to specify the software settings. In this file we can specify how many and which instruments to connect to the software, which data to extract from each instrument, which plots to show, etc. One can create different .json files corresponding to different interfaces.
 An example of .json configuration file is
-'''
+```
 {
   "deviceNames": [ "scopeTektronix", "powermeterThorlabs", "powermeterOphir" ],
 
@@ -103,7 +103,7 @@ An example of .json configuration file is
   ]
 
 }
-'''
+```
 Once the .json file has been created, launch the software with command line
 ```
 python "Path\To\MainApplication\MainApplication.pyw" "Path\To\jsonFile\FileName.json"

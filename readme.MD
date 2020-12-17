@@ -104,7 +104,7 @@ An example of .json configuration file is
 
 }
 ```
-Once the .json file has been created, launch the software with command line
+Once a .json file has been created, the software can be started with command line
 ```
 python "Path\To\MainApplication\MainApplication.pyw" "Path\To\jsonFile\FileName.json"
 ```

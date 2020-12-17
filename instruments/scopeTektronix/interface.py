@@ -20,6 +20,11 @@ class interface(instrument):
         self.instrument = scope(DeviceIdentifier={'TEKTRONIX'}) #Each SettingPanel needs to be associated to an instrument object
         self.plot = None #When a valid plot object is associated to self.plot, the time traces from the two scope axis are plotted into this plot whenever data is updated
 
+    def LinkObjects(self, dictObjects):
+        super().LinkObjects(dictObjects)
+        if not(self.plot==None):
+            self.PlotRawDataFromScope()
+
     def CreatePanelGUI(self,ContainingFrame):    
         self.ContainingFrame = ContainingFrame 
         

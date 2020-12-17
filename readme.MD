@@ -55,7 +55,56 @@ Note: The ophir powermeter also needs to be enabled for USB communication, which
 <!-- USAGE EXAMPLES -->
 ## Usage
 A .json file is used to specify the software settings. In this file we can specify how many and which instruments to connect to the software, which data to extract from each instrument, which plots to show, etc. One can create different .json files corresponding to different interfaces.
-One the .json file has been created, launch the software with command line
+An example of .json configuration file is
+'''
+{
+  "deviceNames": [ "scopeTektronix", "powermeterThorlabs", "powermeterOphir" ],
+
+  "WhichInstrumentActsAsClock": 0,
+
+  "deviceDataToAcquire": [
+    [ "MaxCH1", "MaxCH2", "AvgCH1", "AvgCH2", "IntCH1", "IntCH2", "Pk2PkCH1", "Pk2PkCH2", "MaxCH1/MaxCH2", "AvgCH1/AvgCH2", "IntCH1/IntCH2", "Pk2PkCH1/Pk2PkCH2" ],
+    [ "Power" ],
+    [ "Power" ]
+  ],
+
+  "PlotsConfig": [
+    0,
+    [ "Dev1_Power", "Dev0_Pk2PkCH1", "Dev0_Pk2PkCH2" ],
+    [ "Dev1_Power", "Dev0_Pk2PkCH1/Pk2PkCH2" ]
+  ],
+
+  "PlotsSizes": [
+    [ 8, 8 ],
+    [ 8, 8 ],
+    [ 8, 8 ]
+  ],
+
+  "NCols": 3,
+
+  "DataPlottingStyle": [
+    {
+      "color": "yellow",
+      "linewidth": 2,
+      "marker": "o"
+    },
+    {
+      "color": "blue",
+      "linewidth": 2,
+      "marker": "o"
+    },
+    {
+      "color": "yellow",
+      "linewidth": 2,
+      "marker": "D",
+      "linestyle": "-."
+    },
+   ....
+  ]
+
+}
+'''
+Once the .json file has been created, launch the software with command line
 ```
 python "Path\To\MainApplication\MainApplication.pyw" "Path\To\jsonFile\FileName.json"
 ```

@@ -10,6 +10,7 @@ A Python modular interface to connect different instruments together and automat
 * [Getting Started](#getting-started)
   * [Installation](#installation)
 * [Usage](#usage)
+* [Credits](#credits)
 * [License](#license)
 
 
@@ -20,7 +21,7 @@ A Python modular interface to connect different instruments together and automat
 
 
 ### Built With
-The software is built with Python, Tkinter, and it uses the NI-VISA and py-visa libraries for certain instruments. I learnt several commands and procedures related to VISA & oscilloscope by reading the code of PyTektronixScope (https://github.com/clade/PyTektronixScope)
+The software is built with Python, Tkinter, and it uses the NI-VISA and py-visa libraries for certain instruments. 
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -58,7 +59,8 @@ One the .json file has been created, launch the software with command line
 ```
 python "Path\To\MainApplication\MainApplication.pyw" "Path\To\jsonFile\FileName.json"
 ```
-
+## Credits
+I learnt several commands and procedures related to VISA & oscilloscope by reading the code of PyTektronixScope (https://github.com/clade/PyTektronixScope). The class ConsoleText, which allows to redirect the console output to a Tkinter text widget, is taken from this post https://stackoverflow.com/questions/2914603/segmentation-fault-while-redirecting-sys-stdout-to-tkinter-text-widget.
 
 <!-- LICENSE -->
 ## License

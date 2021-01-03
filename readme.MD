@@ -54,7 +54,7 @@ Note: The ophir powermeter also needs to be enabled for USB communication, which
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-A .json file is used to specify the software settings. In this file we can specify how many and which instruments to connect to the software, which data to extract from each instrument, which plots to show, etc. One can create different .json files corresponding to different interfaces.
+A .json file is used to specify the software settings. In this file we can specify how many and which instruments to connect to the software, which data to extract from each instrument, which plots to show, etc. One can create different .json files corresponding to different interfaces (see the directory "Examples .json files" for some example)
 An example of .json configuration file is
 ```
 {
@@ -106,7 +106,7 @@ An example of .json configuration file is
 ```
 Once a .json file has been created, the software can be started with command line
 ```
-python "Path\To\MainApplication\MainApplication.pyw" "Path\To\jsonFile\FileName.json"
+python "Path\To\DataAcquisition\DataAcquisition.pyw" "Path\To\jsonFile\FileName.json"
 ```
 ## Credits
 I learnt several commands and procedures related to VISA & oscilloscope by reading the code of PyTektronixScope (https://github.com/clade/PyTektronixScope). The class ConsoleText, which allows to redirect the console output to a Tkinter text widget, is taken from this post https://stackoverflow.com/questions/2914603/segmentation-fault-while-redirecting-sys-stdout-to-tkinter-text-widget.

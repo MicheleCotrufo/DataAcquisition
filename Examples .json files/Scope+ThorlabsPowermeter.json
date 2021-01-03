@@ -1,0 +1,104 @@
+{
+  "deviceNames": [ "scopeTektronix", "powermeterThorlabs" ],
+
+  "WhichInstrumentActsAsClock": 0,
+
+  "deviceDataToAcquire": [
+    [ "MaxCH1", "MaxCH2", "AvgCH1", "AvgCH2", "IntCH1", "IntCH2", "Pk2PkCH1", "Pk2PkCH2", "MaxCH1/MaxCH2", "AvgCH1/AvgCH2", "IntCH1/IntCH2", "Pk2PkCH1/Pk2PkCH2" ],
+    [ "Power" ]
+  ],
+
+  "PlotsConfig": [
+    0,
+    [ "Dev1_Power", "Dev0_Pk2PkCH1", "Dev0_Pk2PkCH2" ],
+    [ "Dev1_Power", "Dev0_Pk2PkCH1/Pk2PkCH2" ]
+  ],
+
+  "PlotsSizes": [
+    [ 7, 5 ],
+    [ 7, 5 ],
+    [ 7, 5 ]
+  ],
+
+  "NCols": 3,
+
+  "DataPlottingStyle": [
+    {
+      "color": "yellow",
+      "linewidth": 2,
+      "marker": "o"
+    },
+    {
+      "color": "blue",
+      "linewidth": 2,
+      "marker": "o"
+    },
+    {
+      "color": "yellow",
+      "linewidth": 2,
+      "marker": "D",
+      "linestyle": "-."
+    },
+    {
+      "color": "blue",
+      "linewidth": 2,
+      "marker": "D",
+      "linestyle": "-."
+    },
+    {
+      "color": "yellow",
+      "linewidth": 2,
+      "marker": "8",
+      "linestyle": ":"
+    },
+    {
+      "color": "blue",
+      "linewidth": 2,
+      "marker": "8",
+      "linestyle": ":"
+    },
+    {
+      "color": "yellow",
+      "linewidth": 2,
+      "marker": "x",
+      "linestyle": "--"
+    },
+    {
+      "color": "blue",
+      "linewidth": 2,
+      "marker": "x",
+      "linestyle": "--"
+    },
+    {
+      "color": "red",
+      "linewidth": 2,
+      "marker": "o"
+    },
+    {
+      "color": "green",
+      "linewidth": 2,
+      "marker": "D"
+    },
+    {
+      "color": "cyan",
+      "linewidth": 2,
+      "marker": "8"
+    },
+    {
+      "color": "orange",
+      "linewidth": 2,
+      "marker": "x"
+    },
+    {
+      "color": "white",
+      "linewidth": 2,
+      "marker": "8"
+    },
+    {
+      "color": "white",
+      "linewidth": 2,
+      "marker": "x"
+    }
+  ]
+
+}
